@@ -146,6 +146,30 @@ var cell_rows = 10
 var cell_cols = 10
 var square_size = 50
 
+
+var mobs = [[[0, 0, 4, 8], "rgb(0,0,0)", Math.floor(square_size / 3)]]
+
+var mobs_return = [ [[1, 1, 1, 8], "rgb(100, 0, 0)", Math.floor(square_size / 3), [0, 1]]   ]
+
+
+function addMobs(game_map, game_mobs) {
+    for (var i = 0; i < mobs.length; i++) {
+        var [square, color, radius] = mobs[i]
+        var [mr, mc, cr, cc] = square
+        var mob = new Mob(color, radius, square)
+        game_mobs.push(mob)
+        game_map[mr][mc][cr][cc].push(mob)
+    }
+
+    for (var i = 0; i < mobs_return.length; i++) {
+        var [square, color, radius, direction] = mobs_return[i]
+        var [mr, mc, cr, cc] = square
+        var mob = new MobReturn(color, radius, square, direction)
+        game_mobs.push(mob)
+        game_map[mr][mc][cr][cc].push(mob)
+    }
+}
+
 var img_names = ['grass', 'wall', 'cherry', 'portal', 'bullet_case']
 var images = {}
 for (var i = 0; i < img_names.length; i++) {
@@ -153,14 +177,8 @@ for (var i = 0; i < img_names.length; i++) {
     img.src = "img/" + img_names[i] + ".png"
     images[img_names[i]] = img
 }
-//var ground_images = {'grass': pygame.image.load("images/grass.png")}
-//var barrier_images = {'wall': pygame.image.load("images/wall.png")}
-//var food_images = {'cherry': pygame.image.load("images/cherry.png")}
-//var portal_images = {'portal': pygame.image.load("images/portal.png")}
 var door_colors = {'red_door': 'red', 'blue_door': 'blue'}
 var key_colors = {'red_key': 'red', 'blue_key': 'blue'}
-//var bullet_case_images = {'bullet_case': pygame.image.load("images/bullet_case.PNG")}
-
 
 function build_map(map_all) {
     var map_result = []

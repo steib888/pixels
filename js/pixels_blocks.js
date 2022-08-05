@@ -14,7 +14,7 @@ class Ground {
 
 class Barrier {
     constructor(name, img, x, y) {
-        this.class_name = 'barrier'
+        this.class_name = 'wall'
         this.name = name
         this.img = img
         this.x = x

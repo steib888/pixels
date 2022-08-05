@@ -151,21 +151,5 @@ class Agent {
         ctx.beginPath()
         ctx.arc(x, y, this.radius, 0, 2 * Math.PI)
         ctx.fill()
-
-/*        string = "score: " + str[this.score]
-        text = game.font.render[string, true, [255, 255, 255]]
-        game.window.blit[text, [game.square_size//10, game.cell_cols * game.square_size + game.F_H//3]]
-
-        string = "HP: " + str[this.hp]
-        text = game.font.render[string, true, [255, 255, 255]]
-        game.window.blit[text, [game.square_size*2, game.cell_cols * game.square_size + game.F_H // 3]]
-
-        string = "mr, mc, cr, cc: " + str[this.square]
-        text = game.font.render[string, true, [255, 255, 255]]
-        game.window.blit[text, [game.square_size * 3, game.cell_cols * game.square_size + game.F_H // 3]]
-
-        string = "bag: " + str[this.bag]
-        text = game.font.render[string, true, [255, 255, 255]
-        game.window.blit[text, [5, game.cell_cols * game.square_size + game.F_H // 3 + 20]]
-*/  }
+    }
 }

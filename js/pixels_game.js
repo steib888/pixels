@@ -1,6 +1,9 @@
 class Game {
     constructor() {
         this.map = build_map(map_)
+        this.mobs = []
+        addMobs(this.map, this.mobs)
+
         this.map_rows = map_rows
         this.map_cols = map_cols
         this.cell_rows = cell_rows
@@ -14,7 +17,6 @@ class Game {
         this.footer = new Footer("rgb(0, 0, 0)", 0, this.square_size*this.cell_rows,
                              this.square_size*this.cell_cols, this.F_H)
 
-        this.mobs = []
         this.agents = []
 
         this.fps = 100
@@ -27,8 +29,8 @@ class Game {
         var [a_map_r, a_map_c, a_cell_r, a_cell_c] = this.agents[0].square
         if (this.count % 80 == 0) {
             for (let mob of this.mobs) {
-                [map_r, map_c, cell_r, cell_c] = mob.square
-                if ([map_r, map_c] == [a_map_r, a_map_c]) {
+                var [map_r, map_c, cell_r, cell_c] = mob.square
+                if ((map_r == a_map_r) && (map_c == a_map_c)) {
                     mob.move(this)
                     mob.agent_collide(this)
                 }
@@ -80,5 +82,28 @@ class Footer {
     draw(game) {
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.w, this.h)
+
+
+        ctx.fillStyle = game.agents[0].color
+        ctx.font = '30px serif';
+        var text = "score: " + String(game.agents[0].score)
+        ctx.fillText(text, Math.floor(game.square_size/10), game.cell_cols * game.square_size + Math.floor(game.F_H/3)  )
+
+
+        text = "HP: " + String(game.agents[0].hp)
+        ctx.fillText(text, game.square_size*2, game.cell_cols * game.square_size + Math.floor(game.F_H/3)  )
+/*
+        string = "HP: " + str[this.hp]
+        text = game.font.render[string, true, [255, 255, 255]]
+        game.window.blit[text, [game.square_size*2, game.cell_cols * game.square_size + game.F_H // 3]]
+
+        string = "mr, mc, cr, cc: " + str[this.square]
+        text = game.font.render[string, true, [255, 255, 255]]
+        game.window.blit[text, [game.square_size * 3, game.cell_cols * game.square_size + game.F_H // 3]]
+
+        string = "bag: " + str[this.bag]
+        text = game.font.render[string, true, [255, 255, 255]
+        game.window.blit[text, [5, game.cell_cols * game.square_size + game.F_H // 3 + 20]]
+*/
     }
 }

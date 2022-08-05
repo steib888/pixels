@@ -1,3 +1,7 @@
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 class Mob {
     constructor(color, radius, square) {
         this.class_name = 'enemy'
@@ -11,16 +15,16 @@ class Mob {
     move(game) {
         var [map_r, map_c, cell_r, cell_c] = this.square
         var cell = game.map[map_r][map_c]
-        var dr = randint[-1, 1]
-        var dc = randint[-1, 1]
+        var dr = randomInt(-1, 1)
+        var dc = randomInt(-1, 1)
 
         while ((cell_r + dr > game.cell_rows-1) || (cell_r + dr < 0) || (cell_c + dc > game.cell_cols-1) || (cell_c + dc < 0) || (cell[cell_r+dr][cell_c+dc][0].name == 'wall') || (cell[cell_r+dr][cell_c+dc][0].name == 'portal')) {
-            dr = randint[-1, 1]
-            dc = randint[-1, 1]
+            dr = randomInt(-1, 1)
+            dc = randomInt(-1, 1)
         }
 
         game.map[this.square[0]][this.square[1]][this.square[2]][this.square[3]].pop(this)
-        this.square = (map_r, map_c, cell_r + dr, cell_c + dc)
+        this.square = [map_r, map_c, cell_r + dr, cell_c + dc]
         game.map[this.square[0]][this.square[1]][this.square[2]][this.square[3]].push(this)
     }
 
@@ -52,7 +56,8 @@ class Mob {
 
 class MobReturn extends Mob {
     constructor(color, radius, square, direction) {
-        super().__init__(color, radius, square)
+        super(color, radius, square)
+
         this.direction = direction
         this.name = 'mob_return'
     }
@@ -95,7 +100,7 @@ class MobReturn extends Mob {
 
 class MobGo extends Mob {
     constructor(color, radius, square, steps) {
-        super().__init__(color, radius, square)
+        super().constructor(color, radius, square)
         this.name = 'mob_go'
         this.steps = steps
         this.step = 0
